@@ -1,0 +1,603 @@
+{"code":"
+<div id=\ "webpushr-bell-optin\">\n
+    <style>
+        \n promptbox3 {
+            line-height: 1.1em;
+            position: relative;
+            display: block;
+        }
+
+        \n prompticon3 {
+            \n display: inline-block;
+            \n border-radius: 50%;
+            \n position: fixed;
+            \n bottom: 15px;
+            \n right: 15px;
+            \n width: 55px;
+            \n height: 55px;
+            \n text-align: center;
+            \n filter: drop-shadow(0 2px 4px rgba(34, 36, 38, 0.35));
+            \n z-index: 2147483647;
+            \n cursor: pointer;
+            \n box-sizing: border-box;
+            \n padding: 7px;
+            \n transform: scale(0.9)\n
+        }
+
+        \n\n\n promptglowingcircle {
+            \n display: inline-block;
+            \n border-radius: 50%;
+            \n width: 55px;
+            \n height: 55px;
+            \n text-align: center;
+            \n z-index: 1;
+            \n box-sizing: border-box;
+            \n padding: .45rem;
+            \n content: '';
+            \n position: absolute;
+            \n top: 0;
+            \n left: 0;
+            \n border: #0078ff 1px solid;
+            \n animation: circle 1s infinite;
+            \n
+        }
+
+        \n .webpushr-subscribed promptglowingcircle {
+            display: none
+        }
+
+        \n\n .webpushr-bell-theme-dark prompticon3 {
+            background: #0078ff
+        }
+
+        \n .webpushr-bell-theme-light prompticon3 {
+            background: #fff;
+        }
+
+        \n\n prompticon3 svg {
+            \n border-radius: 100%;
+            \n padding: 0;
+            \n box-sizing: border-box;
+            \n
+        }
+
+        \n .webpushr-bell-theme-dark prompticon3 svg {
+            fill: #fff
+        }
+
+        \n .webpushr-bell-theme-light prompticon3 svg {
+            fill: #0078ff
+        }
+
+        \n\n prompttitle3 {
+            \n background: #000000;
+            \n color: #ffffff;
+            \n \n position: absolute;
+            \n right: 70px;
+            \n min-width: 190px;
+            \n font-size: 13px;
+            \n padding: 5px 10px 5px 10px;
+            \n bottom: 12px;
+            \n border-radius: 8px;
+            \n animation-name: title_left;
+            \n animation-duration: 1.5s;
+            \n animation-iteration-count: infinite;
+            \n animation-direction: alternate;
+            \n min-height: 28px;
+            \n font-family: Arial, Helvetica Neue, Helvetica, sans-serif !important;
+            \n white-space: nowrap;
+            \n box-sizing: border-box;
+            \n
+        }
+
+        \n\nprompttitle3 prompt3TitleArrow {
+            \n content: '';
+            \n width: 10px;
+            \n height: 10px;
+            \n display: block;
+            \n background: #000000;
+            \n position: absolute;
+            \n right: -4px;
+            \n bottom: 9px;
+            \n transform: rotate(45deg);
+            \n z-index: -1;
+            \n
+        }
+
+        \nprompticonimage {
+            \n display: flex;
+            \n width: 100%;
+            \n height: 100%;
+            \n border-radius: 50%;
+            \n border: 2px solid #fff;
+            \n box-sizing: border-box;
+            \n align-items: center;
+            \n justify-content: center;
+            \n
+        }
+
+        \n\npromptbox3.webpushr-bell-style-Squared prompticon3,
+        promptbox3.webpushr-bell-style-Squared promptglowingcircle {
+            border-radius: 10%
+        }
+
+        \npromptbox3.webpushr-bell-style-Squared prompticonimage {
+            \n border-radius: 10%;
+            \n display: flex;
+            \n align-items: center;
+            \n justify-content: center;
+            \n border: none;
+            \n
+        }
+
+        \n\n .webpushr-subscribed prompticon3 {
+            \n transform: scale(.62);
+            \n opacity: .5;
+            \n box-shadow: none;
+            \n
+        }
+
+        \n .webpushr-subscribed prompticon3.webpushr-new-notification {
+            \n transform: scale(0.9);
+            \n opacity: 1;
+            \n
+        }
+
+        \n .webpushr-bell-theme-dark prompticon3 prompticonimage {
+            border-color: transparent;
+        }
+
+        \n .webpushr-bell-theme-light prompticon3 prompticonimage {
+            border-color: transparent
+        }
+
+        \n \n .webpushr-subscribed prompticon3 img {
+            \n padding: .3em .3em;
+            \n transition: padding .3s;
+            \n
+        }
+
+        \n prompticon3._Bell.Bottom.Left_bell {
+            left: 15px;
+            right: unset;
+            transform-origin: left bottom
+        }
+
+        \n prompticon3._Bell.Bottom.Right_bell {
+            transform-origin: right bottom;
+        }
+
+        \n prompticon3._Bell.Bottom.Left_bell prompttitle3 {
+            left: 70px;
+            right: unset;
+            animation-name: title_right;
+        }
+
+        \n prompticon3._Bell.Bottom.Left_bell prompttitle3 prompt3TitleArrow {
+            left: -4px;
+        }
+
+        \n .webpushr-subscribed prompticon3._Bell.Bottom.Left_bell {
+            transform-origin: left bottom;
+            transition: transform .3s;
+        }
+
+        \n .webpushr-subscribed prompticon3._Bell.Bottom.Right_bell {
+            transform-origin: right bottom;
+            transition: transform .3s;
+        }
+
+        \n\n .webpushr-subscribed prompttitle3 {
+            display: none;
+        }
+
+        \n\n promptPopup {
+            \n position: fixed;
+            \n bottom: 75px;
+            \n \n background: #fff;
+            \n width: 220px;
+            \n border-radius: 4px;
+            \n box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+            \n font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            \n padding: 10px 10px 10px 10px;
+            \n z-index: 2147483647;
+            \n transform: scale(0);
+            \n transition: transform .2s;
+            \n box-sizing: content-box;
+            \n letter-spacing: 0.2px;
+            \n
+        }
+
+        \n promptbox3.Left_prompt_popup promptPopup {
+            \n left: 15px;
+            \n transform-origin: left bottom\n
+        }
+
+        \n promptbox3.Right_prompt_popup promptPopup {
+            \n right: 15px;
+            \n transform-origin: right bottom\n
+        }
+
+        \n promptbox3.Right_prompt_popup popup_close {
+            right: 0
+        }
+
+        \n promptbox3.Left_prompt_popup popup_close {
+            left: 0;
+        }
+
+        \n popup_heading {
+            \n text-align: center;
+            \n display: block;
+            \n font-size: 16px;
+            \n margin-bottom: 10px;
+            \n
+        }
+
+        \n popup_heading.popup-button-heading {
+            \n border-bottom: none;
+            \n margin-top: 0;
+            \n padding-top: 0;
+            \n
+        }
+
+        \n popup_button {
+            \n display: block;
+            \n padding: 0px 0 0px 0;
+            \n text-align: center;
+            \n
+        }
+
+        \n popup_button btn {
+            \n width: 190px;
+            \n background: #0078ff;
+            \n margin: 0 auto;
+            \n padding: 15px;
+            \n border-radius: 4px;
+            \n color: #fff;
+            \n font-family: Arial, Helvetica Neue, Helvetica, sans-serif !important;
+            \n font-size: 16px;
+            \n cursor: pointer;
+            \n display: none;
+            \n position: relative;
+            \n line-height: 16px !important;
+            \n box-sizing: content-box;
+            \n
+        }
+
+        \n popup_heading_text {
+            display: none;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            color: #777;
+            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: 0.2px
+        }
+
+        \n .webpushr-subscribed.webpushr-notification-on btn.webpushrOnBtn {
+            display: block;
+            background: #90949c;
+        }
+
+        \n .webpushrUnknownBtn {
+            display: block;
+        }
+
+        \n .webpushr-subscribed .webpushrUnknownBtn {
+            display: none;
+        }
+
+        \n .webpushr-subscribed.webpushr-notification-on .webpushrOnBtn {
+            display: block;
+        }
+
+        \n .webpushr-subscribed.webpushr-notification-off .webpushrOffBtn {
+            display: block;
+        }
+
+        \n .webpushr-subscribed.webpushr-notification-denied .webpushrDeniedBtn {
+            display: block;
+        }
+
+        \n .webpushr-subscribed.webpushr-ackn btn {
+            display: none !important;
+        }
+
+        \n .webpushr-subscribed.webpushr-ackn btn.webpushrAcknBtn {
+            display: block !important;
+        }
+
+        \n btn.webpushrUnknownBtn,
+        btn.webpushrOffBtn {
+            background: #0078ff;
+        }
+
+        \n\npopup_poweredby,
+        popup_poweredby a,
+        popup_poweredby a:hover,
+        popup_poweredby a:active,
+        popup_poweredby a:focus {
+            \n display: block;
+            \n text-align: center;
+            \n font-size: 10px;
+            \n font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            ;
+            \n color: #777 !important;
+            \n font-weight: 400;
+            \n text-decoration: none;
+            \n
+        }
+
+        \npopup_poweredby * {
+            display: inline-block !important
+        }
+
+        \n\npopup_close {
+            \n position: absolute;
+            \n top: -30px;
+            \n width: 20px;
+            \n height: 20px;
+            \n background: black;
+            \n display: block;
+            \n text-align: center;
+            \n color: #fff;
+            \n border-radius: 50%;
+            \n font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            \n box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+            \n cursor: pointer;
+            \n font-size: 10px;
+            \n padding: 6px;
+            \n line-height: 0.8;
+            \n box-sizing: border-box;
+            \n
+        }
+
+        \n\n .webpushr-subscribed prompticon3:hover,
+        .webpushr-subscribed .promptBellLarge {
+            \n transform: scale(0.9);
+            \n transition: transform .3s;
+            \n opacity: 1;
+            \n filter: drop-shadow(0 2px 4px rgba(34, 36, 38, 0.35));
+            \n
+        }
+
+        \n promptPopup.promptPopup-show {
+            \n transform: scale(1);
+            \n transition: transform .3s;
+            \n \n
+        }
+
+        \n .webpushrAcknBtn {
+            font-size: 30px;
+        }
+
+        \n btn.webpushrOnBtn:after,
+        btn.webpushrOffBtn:after {
+            content: '';
+            width: 0;
+            height: 0px;
+            background: #fff;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        \n btn.webpushrBtnWaiting:after {
+            width: 100%;
+            height: 3px;
+            transition: width 1s;
+        }
+
+        \n .webpushr-server-error popup_heading_text.webpushrServerError {
+            display: block;
+        }
+
+        \n .webpushr-server-error btn.webpushrAcknBtn {
+            display: block !important;
+            background: #e2232c;
+        }
+
+        \n .webpushr-server-error btn.webpushrAcknBtn:after {
+            content: '\\2715';
+        }
+
+        \n\n .webpushr-server-success btn.webpushrAcknBtn {
+            display: block !important;
+            background: #15CD72;
+        }
+
+        \n .webpushr-server-success btn.webpushrAcknBtn:after {
+            content: '\\2713';
+        }
+
+        \n\n .webpushr-subscribed .webpushr-bell-style-Squared prompticon3.Right_bell {
+            right: -2px !important;
+            left: unset;
+            transform: scale(1) !important;
+            transition: transform .3s, right .3s !important;
+        }
+
+        \n .webpushr-subscribed .webpushr-bell-style-Squared prompticon3.Left_bell {
+            left: -2px !important;
+            right: unset;
+            transform: scale(1) !important;
+            transition: transform .3s, left .3s !important;
+        }
+
+        \n .webpushr-subscribed .Right_prompt_popup.webpushr-bell-style-Squared promptpopup {
+            right: 25px;
+        }
+
+        \n .webpushr-subscribed .Left_prompt_popup.webpushr-bell-style-Squared promptpopup {
+            left: 25px;
+        }
+
+        \n\n popup_notifications_wrapper {
+            display: block;
+            box-sizing: border-box;
+        }
+
+        \npopup_notification {
+            \n position: relative;
+            \n display: flex;
+            \n padding: 10px 5px;
+            \n margin-top: 8px;
+            \n cursor: pointer;
+            \n box-shadow: rgb(0 0 0 \/ 10%) 0px 1px 5px 2px, rgb(0 0 0 \/ 30%) 0px 0px 2px 0px, #0078ff80 0px 2px 0px 0px inset;
+            \n border-radius: 10px;
+            \n
+        }
+
+        \npopup_notification:hover {
+            background: #f7f7f7;
+        }
+
+        \nnotification_image {
+            \n display: flex;
+            \n align-items: center;
+            \n width: 105px;
+            \n margin: 0 5px;
+            \n height: 60px;
+            \n border: 1px solid #eee;
+            \n overflow: hidden;
+            \n border-radius: 7px;
+            \n
+        }
+
+        \nnotification_image img {
+            \n height: auto;
+            \n width: 100%;
+            \n
+        }
+
+        \nnotification_body {
+            \n display: flex;
+            \n flex-direction: column;
+            \n font-size: 12px;
+            \n margin: 0 5px;
+            \n
+        }
+
+        \nnotification_title {
+            \n font-weight: 400;
+            \n font-size: 15px;
+            \n max-width: 220px;
+            \n letter-spacing: 0.2px;
+            \n font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            \n color: rgb(65 88 255);
+            \n height: 37px;
+            \n overflow: hidden;
+            \n line-height: 18px;
+            \n\n
+        }
+
+        \n\nnotification_time {
+            \n font-style: italic;
+            \n font-size: 10px;
+            \n color: gray;
+            \n font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            \n letter-spacing: 0.2px;
+            \n font-weight: 400;
+            \n direction: ltr;
+            \n text-align: left;
+            \n
+        }
+
+        \npromptnotificationicon {
+            \n background: red;
+            \n color: #fff;
+            \n display: flex;
+            \n align-items: center;
+            \n justify-content: center;
+            \n width: 20px;
+            \n height: 20px;
+            \n border-radius: 50%;
+            \n position: absolute;
+            \n top: -5px;
+            \n right: -2px;
+            \n font-family: sans-serif;
+            \n font-size: 12px;
+            \n z-index: 1;
+            \n
+        }
+
+        \n.Right_prompt_popup.webpushr-bell-style-Squared promptnotificationicon {
+            right: unset;
+            left: -7px
+        }
+
+        \n@keyframes title_left {
+            \n 0% {
+                right: 70px;
+            }
+            \n 50% {
+                right: 75px;
+            }
+            \n 100% {
+                right: 75px;
+            }
+            \n
+        }
+
+        \n@keyframes title_right {
+            \n 0% {
+                left: 70px;
+            }
+            \n 50% {
+                left: 75px;
+            }
+            \n 100% {
+                left: 75px;
+            }
+            \n
+        }
+
+        \n@keyframes circle {
+            \n from {
+                transform: scale(1);
+                opacity: 1
+            }
+            \n to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+            \n
+        }
+
+        \n\nprompticon3:hover prompttitle3 {
+            display: block;
+        }
+
+        \n#webpushrDeniedImg {
+            max-width: 220px;
+            display: block;
+            margin: 0 auto;
+            max-height: 250px;
+        }
+
+        \npopup_poweredby {
+            \n padding-top: 10px;
+            \n display: -webkit-flex;
+            \n align-items: center;
+            \n justify-content: center;
+            \n line-height: 1;
+            \n
+        }
+
+        \n\n<\/style>\n\n<promptbox3 class=\"webpushr-bell-theme-dark Bottom Left_prompt_popup webpushr-bell-style-Rounded\">\n    <prompticon3 class=\"webpushr-toggle-bell-popup _Bell Bottom Left_bell\" >\n        <promptglowingcircle><\/promptglowingcircle>\n        <prompticonimage><svg  version=\"1.1\" id=\"Capa_1\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 440.832 440.832\" style=\"width:25px; height:35px;\" xml:space=\"preserve\"><g><g><path d=\"M381.44,265.728V161.792C381.44,72.192,309.248,0,219.648,0S58.368,72.192,58.368,161.792v103.936l-41.984,82.944h408.064 L381.44,265.728z\"\/><\/g><\/g><g><g><path d=\"M151.552,372.736c0,37.376,30.72,68.096,68.096,68.096c37.376,0,68.096-30.72,68.096-68.096H151.552z\"\/><\/g><\/g><\/svg><\/prompticonimage>  \n            <\/prompticon3>\n    <!-- <prompttitle3 class=\"prompt_bell_title\"><prompt3titletext>Subscribe to receiving push notifications<\/prompt3titletext><prompt3titlearrow><\/prompt3titlearrow><\/prompttitle3> -->\n    <promptPopup class=\"\">\n        <popup_close class=\"webpushr-toggle-bell-popup\" >&#10005;<\/popup_close>\n                <popup_heading class=\"popup-button-heading\"  >\n           <popup_heading_text class=\"webpushrServerError\">Error. Try later.<\/popup_heading_text>\n           <popup_heading_text class=\"webpushrDeniedBtn\">You have blocked Push Notifications. Follow these instructions to enable Push Notifications.<\/popup_heading_text>\n           <popup_heading_text class=\"webpushrUnknownBtn\">Subscribe to receive push notifications on latest updates<\/popup_heading_text>\n           <popup_heading_text class=\"webpushrOffBtn\">You are unsubscribed to Push Notifications<\/popup_heading_text>\n           <popup_heading_text class=\"webpushrOnBtn\">You are subscribed to Push Notifications<\/popup_heading_text>\n        <\/popup_heading>\n        <popup_button>\n            <webpushrDeniedBtn class=\"webpushrDeniedBtn\"><img id=\"webpushrDeniedImg\"   alt=\"\"><\/webpushrDeniedBtn>\n            <btn id=\"webpushrUnknownBtn\" class=\"webpushrUnknownBtn\">SUBSCRIBE<\/btn>\n            <btn class=\"webpushrAcknBtn\"><\/btn>\n            <btn id=\"webpushrOffBtn\" class=\"webpushrOffBtn webpushrActionBtn\">SUBSCRIBE<\/btn>\n            <btn id=\"webpushrOnBtn\" class=\"webpushrOnBtn webpushrActionBtn\">UNSUBSCRIBE<\/btn>\n         <\/popup_button>\n                     <popup_poweredby dir=\"ltr\">\u26a1 by <a  href=\"https:\/\/www.webpushr.com\">&nbsp;Webpushr<\/a><\/popup_poweredby>\n            <\/promptPopup>\n<\/promptbox3>\n<\/div>",
+        "notification_center_code":"",
+        "topics":"",
+        "prompt_type":"1",
+        "show_prompt":"Immediately",
+        "notification_cards":"1",
+        "notification_card": {
+            "auto_hide":"1",
+            "auto_hide_delay":"10",
+            "code":"<style>\n      #webpushr-notification-card-wrapper{\n      width:310px;position: fixed;z-index: 2147483644;  opacity:0;bottom:-70px; right: 10px;\n      transition: opacity .3s, bottom .3s;\n   }\n   #webpushr-notification-card-wrapper popup_close{\n      top: -25px;\n      right: 0;\n      position: absolute;\n      width: 20px;\n      height: 20px;\n      background: black;\n      display: block;\n      text-align: center;\n      color: #fff;\n      border-radius: 50%;\n      font-family: Arial,Helvetica Neue,Helvetica,sans-serif;\n      box-shadow: 0 0 10px rgb(0 0 0 \/ 20%);\n      cursor: pointer;\n      font-size: 10px;\n      padding: 6px;\n      line-height: 0.8;\n      box-sizing: border-box      \n   } \n   #webpushr-notification-card-wrapper popup_notifications_wrapper {\n      display: block;\n      box-sizing: border-box;\n      position: relative;\n      margin-top: 25px;\n   }   \n   #webpushr-notification-card-wrapper.show-webpushr-notification-card {\n      \n      opacity: 1;\n      bottom: 30px;\n      transition: opacity .4s, bottom .4s;\n   }   \n   #webpushr-notification-card-wrapper popup_notification{\n      background:#fff;\n      display: flex;\n      padding: 10px 5px;\n      margin-top: 8px;\n      cursor: pointer;\n      box-shadow: rgb(0 0 0 \/ 10%) 0px 1px 5px 2px, rgb(0 0 0 \/ 30%) 0px 0px 2px 0px, #0078ff80 0px 2px 0px 0px inset;\n      border-radius: 10px;      \n   }\n   #webpushr-notification-card-wrapper popup_notifications_wrapper.theme-Dark popup_notification{box-shadow: rgb(0 0 0 \/ 10%) 0px 1px 5px 2px, rgb(0 0 0 \/ 30%) 0px 0px 2px 0px, #333 0px 2px 0px 0px inset;}\n   #webpushr-notification-card-wrapper notification_image {\n      display: flex;\n      align-items: center;\n      width: 105px;\n      margin: 0 5px;\n      height: 60px;\n      border: 1px solid #eee;\n      overflow: hidden;\n      border-radius: 7px;\n   }\n   #webpushr-notification-card-wrapper notification_image img {\n      height: auto;\n      width: 100%;\n   }\n   #webpushr-notification-card-wrapper notification_body {\n      display: flex;\n      flex-direction: column;\n      font-size: 12px;\n      margin:0 5px;\n   }\n   #webpushr-notification-card-wrapper notification_title {\n      font-weight: 400;\n      font-size: 15px;\n      max-width: 220px;\n      letter-spacing: 0.2px;\n      font-family: Arial,Helvetica Neue,Helvetica,sans-serif;\n      color: rgb(65 88 255);\n      height: 37px;\n      overflow: hidden;\n      line-height: 18px;\n   }\n   #webpushr-notification-card-wrapper notification_time {\n      font-style: italic;\n      font-size: 10px;\n      color: gray;\n      font-family: Arial,Helvetica Neue,Helvetica,sans-serif;\n      letter-spacing: 0.2px;\n      font-weight: 400;\n      line-height: 13px;\n      direction:ltr;\n      text-align:left;\n   }   \n    #webpushr-notification-card-wrapper .theme-Dark popup_notification{\n        background:#333;\n    }\n    #webpushr-notification-card-wrapper .theme-Dark notification_title{color:#fff;}\n<\/style>\n<popup_notifications_wrapper class=\"theme-Light\">\n      <popup_close class=\"\" id=\"webpushr-close-card\">X<\/popup_close>\n      <\/popup_notifications_wrapper>\n",
+            "enabled": "1"
+        }
+
+        ,
+        "subscriptionbell_show":"1",
+        "notification_center":"1"
+        }

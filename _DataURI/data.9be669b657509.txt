@@ -1,0 +1,1 @@
+chrome-extension://megbklhjamjbcafknkgmokldgolkdfig/updater.content-script.js
